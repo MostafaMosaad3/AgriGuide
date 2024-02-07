@@ -25,7 +25,7 @@ class LoginNotification extends Notification
     {
         $this->message = 'you are logged in' ;
         $this->subject = 'new logging in' ;
-        $this->from_email = 'mm9852803@gmail.com' ;
+        $this->from_email = 'mostafamosad@std.mans.edu.eg' ;
         $this->mailer= 'smtp' ;
 
     }

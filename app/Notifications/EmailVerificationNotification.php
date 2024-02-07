@@ -24,7 +24,7 @@ class EmailVerificationNotification extends Notification
     {
         $this->message='use the below code for verification process' ;
         $this->subject='verification needed' ;
-        $this->from_email = 'mm9852803@gmail.com' ;
+        $this->from_email = 'mostafamosad@std.mans.edu.eg' ;
         $this->mailer= 'smtp' ;
         $this->otp = new Otp ;
 

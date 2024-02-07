@@ -23,7 +23,7 @@ class ResetPasswordNotification extends Notification
     {
         $this->message='use the below code for resetting password' ;
         $this->subject='resetting password' ;
-        $this->from_email = 'mm9852803@gmail.com' ;
+        $this->from_email = 'mostafamosad@std.mans.edu.eg' ;
         $this->mailer= 'smtp' ;
         $this->otp = new Otp ;
     }
