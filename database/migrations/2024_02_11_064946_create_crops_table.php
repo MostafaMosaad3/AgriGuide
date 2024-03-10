@@ -17,13 +17,12 @@ return new class extends Migration
             $table->foreignId('soil_id')->constrained() ;
             $table->string('name') ;
             $table->string('image') ;
-            $table->string('Recommended Time') ;
-            $table->string('Planting Method') ;
-            $table->string('water requirement') ;
-            $table->string('Irrigation Method') ;
-            $table->string('Fertilizers');
-            $table->string('Common Diseases') ;
-            $table->string('Planting Tips') ;
+            $table->text('Recommended Time') ;
+            $table->text('Planting Method') ;
+            $table->text('water requirement') ;
+            $table->text('Irrigation Method') ;
+            $table->text('Fertilizers');
+            $table->text('Planting Tips') ;
         });
     }
 

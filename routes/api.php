@@ -2,18 +2,27 @@
 
 
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordVerificationController;
 use App\Http\Controllers\Auth\loginController;
 use App\Http\Controllers\Auth\logoutController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgetPasswordController;
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Community\QuestionCommentController;
 use App\Http\Controllers\Community\QuestionController;
 use App\Http\Controllers\Consultion\InstractorController;
 use App\Http\Controllers\Dashboard\PostController;
-use App\Http\Controllers\datacontroller;
+use App\Http\Controllers\Disease\DiseaseController;
 use App\Http\Controllers\GrowingTips\TipController;
+use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Home\WeatherController;
+use App\Http\Controllers\Membership\MembershipController;
+use App\Http\Controllers\Service\ServiceController;
+use App\Http\Controllers\Soil\SoilController;
+use App\Http\Controllers\SuitableCrops\CropController;
+use App\Models\Post;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,19 +42,55 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware'=>'auth:sanctum'] , function(){
 
     // Auth Routes
-    Route::get('/profile/{id}', [ProfileController::class , 'show']);
-    Route::patch('/update_profile/{id}' , [ProfileController::class , 'update']) ;
-    Route::post('/email_verification' , [EmailVerificationController::class ,'email_verification' ]);
     Route::get('/send_email_verification' , [EmailVerificationController::class ,'SendEmailVerification' ]);
+    Route::post('/email_verification' , [EmailVerificationController::class ,'email_verification' ]);
+    Route::get('/profile', [ProfileController::class , 'profile']);
+    Route::patch('/profile/update_profile' , [ProfileController::class , 'update']) ;
     Route::post('/logout' , [logoutController::class , 'logout']) ;
-    Route::get('/question' ,[QuestionController::class , 'index'] );
+
+
+    //Home Routes
+    Route::get('/weather', [WeatherController::class, 'getWeather']);
+    Route::get('/blogs', [HomeController::class, 'blogs']);
+    Route::get('/search', [HomeController::class, 'search']);
+
+
+    //Service Routes
+    Route::get('/services', [ServiceController::class, 'index']) ;
+
+
+
+    //Soil Routes
+    Route::get('/soils' , [SoilController::class , 'index']);
+    Route::get('/soils/search' , [SoilController::class , 'search']) ;
+    Route::get('/soils/soil/{name}' , [SoilController::class ,'show']) ;
+
+
+
+    //Crops Routes
+    Route::get('/crops' , [CropController::class , 'index']);
+    Route::get('/crops/soils' , [CropController::class , 'soils']);
+    Route::get('/crops/search' , [CropController::class , 'search']) ;
+    Route::get('/crops/crop/{id}' , [CropController::class , 'show']);
+
+
+    //Diseases Routes
+    Route::get('/diseases' , [DiseaseController::class , 'index']);
+    Route::get('/diseases/search' , [DiseaseController::class , 'search']) ;
+    Route::get('/diseases/disease/{name}' , [DiseaseController::class ,'show']) ;
+
+
 
 
     //Community Routes
-    Route::post('/create_question' ,[QuestionController::class , 'create'] );
-    Route::get('/question/{id}' , [QuestionController::class , 'show']);
-    Route::post('/question/{id}' , [QuestionCommentController::class , 'add_comment']);
-
+    Route::group(['middleware' => 'basic_membership'] , function() {
+        Route::get('/question', [QuestionController::class, 'index']);
+        Route::post('/question/create_question', [QuestionController::class, 'create']);
+        Route::get('/question/{id}', [QuestionController::class, 'show']);
+        Route::post('/question/{id}', [QuestionCommentController::class, 'add_comment']);
+        Route::post('/questions/{id}/likes', [QuestionController::class, 'add_like']);
+        Route::get('/questions/{id}/likes', [QuestionController::class, 'all_likes']);
+    });
 
 
     //GrowingTips Routes
@@ -57,21 +102,29 @@ Route::group(['middleware'=>'auth:sanctum'] , function(){
 
 
     //Consultation Routes
-    Route::get('/consultation' , [InstractorController::class , 'index']);
-    Route::get('/consultation/{id}' , [InstractorController::class , 'show']) ;
+    Route::group(['middleware'=>'premium_membership'] , function(){
+        Route::get('/consultation', [InstractorController::class, 'index']);
+        Route::get('/consultation/{id}', [InstractorController::class, 'show']);
+    });
 
+
+    //MembershipsLevels Routes
+    Route::get('/membership' , [MembershipController::class , 'index']);
+    Route::get('membership/{id}' , [MembershipController::class , 'purchase']);
 
     //Dashboard Routes
     Route::group(['middleware' =>'admin'] , function (){
         Route::get('/posts' ,[PostController::class , 'index'] );
-        Route::post('/create_post' ,[PostController::class , 'create'] );
-        Route::patch('/update_post/{id}' ,[PostController::class , 'update'] );
-        Route::delete('/post/{id}' ,[PostController::class , 'destroy'] );
+        Route::post('/posts/create_post' ,[PostController::class , 'create'] );
+        Route::get('/posts/edit/{id}' , [PostController::class , 'edit']) ;
+        Route::patch('/posts/update_post/{id}' ,[PostController::class , 'update'] );
+        Route::delete('/posts/delete_post/{id}' ,[PostController::class , 'destroy'] );
     });
+
 
 }) ;
 
-Route::post('add_soil',[datacontroller::class,'soildata']);
+
 
 
 
@@ -81,7 +134,9 @@ Route::post('add_soil',[datacontroller::class,'soildata']);
 Route::post('/register' , [RegisterController::class, 'register']);
 Route::post('/login' , [LoginController::class, 'login']) ;
 Route::post('/forget_password' , [ForgetPasswordController::class , 'forget_password']) ;
+Route::post('/forget_password_verification' , [ResetPasswordVerificationController::class , 'forget_password_verification']) ;
 Route::post('/reset_password' , [ResetPasswordController::class , 'reset_password']) ;
+
 
 
 

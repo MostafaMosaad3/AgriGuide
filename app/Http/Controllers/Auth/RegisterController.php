@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Mail\EmailVerificationMail;
 use App\Models\User;
 use App\Notifications\EmailVerificationNotification;
+use Illuminate\Support\Facades\Mail;
 
 
 class RegisterController extends Controller
@@ -20,14 +22,19 @@ class RegisterController extends Controller
             'password' => bcrypt($credintionals['password'])
         ]);
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->createToken('MyApp')->plainTextToken;
+
 
         $responce = [
             'user' => $user,
-            'token' => $token
+            'token'=>$token
         ];
 
-        $user->notify(new EmailVerificationNotification()) ;
+        $code = rand(111111 , 999999) ;
+        $user->update(['otp_code' => $code]);
+
+
+        Mail::to($user->email)->Send(new EmailVerificationMail($code));
         return Response($responce, 201);
     }
 }

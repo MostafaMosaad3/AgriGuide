@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('diseases', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('crop_id')->constrained() ;
             $table->string('name') ;
+            $table->string('description') ;
             $table->string('image') ;
-            $table->string('Prevention and Control') ;
+            $table->text('Prevention and Control') ;
         });
     }
 

@@ -15,7 +15,7 @@ class Crop extends Model
         return $this->belongsTo(Soil::class) ;
     }
 
-    public function disease(){
-        return $this->hasMany(Disease::class) ;
+    public function diseases(){
+        return $this->belongsToMany(Disease::class) ;
     }
 }

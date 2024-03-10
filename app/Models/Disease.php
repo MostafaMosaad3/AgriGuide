@@ -11,9 +11,9 @@ class Disease extends Model
 
     protected $guarded = [] ;
 
-    public function crop(){
+    public function crops(){
 
-        return $this->belongsTo(Crop::class) ;
+        return $this->belongsToMany(Crop::class) ;
 
     }
 }

@@ -16,9 +16,9 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name') ;
             $table->string('image') ;
-            $table->string('Recommended_Water') ;
-            $table->String('Recommended_Fertilizers') ;
-            $table->string('additional_notes') ;
+            $table->text('Recommended_Water') ;
+            $table->text('Recommended_Fertilizers') ;
+            $table->text('additional_notes') ;
             $table->string('suitable_crops') ;
             $table->text('properties') ;
         });

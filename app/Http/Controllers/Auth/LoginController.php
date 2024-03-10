@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
-use App\Notifications\LoginNotification;
 use Illuminate\Support\Facades\Hash;
 
 class loginController extends Controller
@@ -27,10 +26,9 @@ class loginController extends Controller
         $token = $user->createToken('myapptoken')->plainTextToken;
 
         $responce = [
-            'user' => $user,
+            'user' => $user->name ,
             'token' => $token
         ];
-        $user->notify(new LoginNotification()) ;
         return Response($responce, 201);
     }
 }

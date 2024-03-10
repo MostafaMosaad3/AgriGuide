@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
             'email'=> 'Mosaad@gmail.com' ,
             'password'=> bcrypt('password') ,
             'thumbnail'=> url('storage/user/1.png') ,
-            'is_admin'=>'1'
+            'is_admin'=>'1' ,
+            'membership_level_id'=>'4'
         ] ,
 
         User::create([
@@ -30,7 +31,8 @@ class UserSeeder extends Seeder
             'email'=> 'Omar@gmail.com' ,
             'password'=> 'password' ,
             'thumbnail'=> url('storage/user/2.png') ,
-            'is_admin'=>'1'
+            'is_admin'=>'1' ,
+            'membership_level_id'=>'3'
         ]) ,
 
         User::create([
@@ -39,7 +41,8 @@ class UserSeeder extends Seeder
             'email'=> 'Mohamed@gmail.com' ,
             'password'=> 'password' ,
             'thumbnail'=> url('storage/user/3.png') ,
-            'is_admin'=>'1'
+            'is_admin'=>'1' ,
+            'membership_level_id'=>'3'
         ])  ,
 
         User::create([
@@ -48,7 +51,8 @@ class UserSeeder extends Seeder
             'email'=> 'Ahmad@gmail.com' ,
             'password'=> 'password' ,
             'thumbnail'=> url('storage/user/4.jpg') ,
-            'is_admin'=>'1'
+            'is_admin'=>'1' ,
+            'membership_level_id'=>'2'
         ]) ,
 
         User::create([
@@ -57,7 +61,8 @@ class UserSeeder extends Seeder
             'email'=> 'Sayed@gmail.com' ,
             'password'=> 'password' ,
             'thumbnail'=> url('storage/user/5.png') ,
-            'is_admin'=>'1'
+            'is_admin'=>'1' ,
+            'membership_level_id'=>'2'
         ] ),
 
         User::create([
@@ -65,7 +70,8 @@ class UserSeeder extends Seeder
             'name'=>'Nora' ,
             'email'=> 'Nora@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/6.png')
+            'thumbnail'=> url('storage/user/6.png') ,
+            'membership_level_id'=>'1'
         ]),
 
         User::create([
@@ -73,7 +79,8 @@ class UserSeeder extends Seeder
             'name'=>'Ward' ,
             'email'=> 'Ward@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/7.png')
+            'thumbnail'=> url('storage/user/7.png') ,
+            'membership_level_id'=>'1'
         ])   ,
 
         User::create([
@@ -81,7 +88,8 @@ class UserSeeder extends Seeder
             'name'=>'Walaa' ,
             'email'=> 'Walaa@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/8.png')
+            'thumbnail'=> url('storage/user/8.png') ,
+            'membership_level_id'=>'1'
         ]) ,
 
         User::create([
@@ -89,7 +97,8 @@ class UserSeeder extends Seeder
             'name'=>'Hager' ,
             'email'=> 'Hager@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/9.png')
+            'thumbnail'=> url('storage/user/9.png') ,
+            'membership_level_id'=>'1'
         ])  ,
 
         User::create([
@@ -97,7 +106,8 @@ class UserSeeder extends Seeder
             'name'=>'Menna' ,
             'email'=> 'Menna@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/10.jpg')
+            'thumbnail'=> url('storage/user/10.jpg') ,
+            'membership_level_id'=>'1'
         ]) ,
 
         User::create([
@@ -105,7 +115,8 @@ class UserSeeder extends Seeder
             'name'=>'Dina' ,
             'email'=> 'Dina@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/11.jpg')
+            'thumbnail'=> url('storage/user/11.jpg') ,
+            'membership_level_id'=>'1'
         ])
         );
     }

@@ -74,6 +74,10 @@ return [
         public_path('storage/post')=>storage_path('app\public/post'),
         public_path('storage/user')=>storage_path('app\public/user'),
         public_path('storage/soil')=>storage_path('app\public/soil'),
+        public_path('storage/service')=>storage_path('app\public/service') ,
+        public_path('storage/soil')=>storage_path('app\public/soil') ,
+        public_path('storage/crop')=>storage_path('app\public/crop') ,
+        public_path('storage/disease')=>storage_path('app\public/disease') ,
     ],
 
 ];

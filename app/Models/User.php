@@ -46,5 +46,16 @@ class User extends Authenticatable
         return $this->hasMany(Post::class) ;
     }
 
+    public function membershipLevel()
+    {
+        return $this->belongsTo(MemberShip_level::class, 'membership_level_id', 'id');
+    }
+
+    public function DecrementFreeTrails(){
+        $this->free_trails -= 1 ;
+        $this->Save();
+        return $this->free_trails ;
+    }
+
 
 }

@@ -10,7 +10,11 @@ use App\Models\Post;
 class TipController extends Controller
 {
     public function index(){
-        $tips = Post::with('user' , 'category')->paginate(6);
+        $tips = Post::with([
+            'user'=>function($query){$query->select('id', 'name');} ,
+            'category'=>function($query){$query->select('id' , 'name') ;}])
+            ->select('title', 'image' , 'user_id', 'category_id')
+            ->paginate(6);
         return response()->json(['tips'=>$tips]) ;
     }
 
@@ -27,7 +31,9 @@ class TipController extends Controller
 
 
     public function tip($id){
-        $tip = Post::with('user' ,'category')->find($id) ;
+        $tip = Post::with(['user'=>function($query){
+            $query->select('id' , 'name' , 'thumbnail');
+        } ,'category'])->find($id) ;
         return response()->json(['tip'=>$tip]) ;
     }
 

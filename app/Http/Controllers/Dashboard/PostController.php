@@ -11,7 +11,7 @@ class PostController extends Controller
 {
 
     public function index(){
-        $posts = Post::with(['user' , 'category'])->paginate(6);
+        $posts = Post::select('id' ,'title', 'slug')->paginate(6);
         return response()->json(['posts'=>$posts]);
     }
 
@@ -28,6 +28,11 @@ class PostController extends Controller
         $post = Post::create($attributes);
         return response()->json(['post published' ,'post'=>$post]);
 
+    }
+
+    public function edit($id){
+        $post = Post::find($id) ;
+        return response()->json($post);
     }
 
 
