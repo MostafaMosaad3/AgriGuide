@@ -9,18 +9,21 @@ use App\Http\Controllers\Auth\logoutController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgetPasswordController;
+use App\Http\Controllers\Chat\MessageController;
 use App\Http\Controllers\Community\QuestionCommentController;
 use App\Http\Controllers\Community\QuestionController;
 use App\Http\Controllers\Consultion\InstractorController;
 use App\Http\Controllers\Dashboard\PostController;
 use App\Http\Controllers\Disease\DiseaseController;
 use App\Http\Controllers\GrowingTips\TipController;
+use App\Http\Controllers\Hiring\HiringController;
 use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Home\WeatherController;
 use App\Http\Controllers\Membership\MembershipController;
 use App\Http\Controllers\Service\ServiceController;
 use App\Http\Controllers\Soil\SoilController;
 use App\Http\Controllers\SuitableCrops\CropController;
+use App\Http\Controllers\Task\TaskController;
 use App\Models\Post;
 use App\Models\Question;
 use Illuminate\Http\Request;
@@ -81,6 +84,26 @@ Route::group(['middleware'=>'auth:sanctum'] , function(){
 
 
 
+    //GrowingTips Routes
+    Route::get('/growing_tips' , [TipController::class , 'index']) ;
+    Route::get('/growing_tips/categories' , [TipController::class , 'all_categories']) ;
+    Route::get('/growing_tips/categories/{id}' , [TipController::class , 'category']) ;
+    Route::get('/growing_tips/{id}' , [TipController::class , 'tip']) ;
+
+
+
+    //MembershipsLevels Routes
+    Route::get('/membership' , [MembershipController::class , 'index']);
+    Route::get('membership/{id}' , [MembershipController::class , 'purchase']);
+
+
+    //Chat Routes
+    Route::post('/send_message' , [MessageController::class , 'sendMessage']) ;
+    Route::get('/receive_message/{id}' , [MessageController::class , 'receiveMessage']);
+    Route::get('/conversations', [MessageController::class, 'conversations']);
+
+
+
 
     //Community Routes
     Route::group(['middleware' => 'basic_membership'] , function() {
@@ -93,11 +116,15 @@ Route::group(['middleware'=>'auth:sanctum'] , function(){
     });
 
 
-    //GrowingTips Routes
-    Route::get('/growing_tips' , [TipController::class , 'index']) ;
-    Route::get('/growing_tips/categories' , [TipController::class , 'all_categories']) ;
-    Route::get('/growing_tips/categories/{id}' , [TipController::class , 'category']) ;
-    Route::get('/growing_tips/{id}' , [TipController::class , 'tip']) ;
+
+    //Tasks Routes
+    Route::group(['middleware' =>'basic_membership'] , function (){
+        Route::get('/tasks' ,[TaskController::class , 'index'] );
+        Route::post('/tasks/create_task' ,[TaskController::class , 'create'] );
+        Route::get('/tasks/edit/{id}' , [TaskController::class , 'edit']) ;
+        Route::patch('/tasks/update_task/{id}' ,[TaskController::class , 'update'] );
+        Route::delete('/tasks/delete_task/{id}' ,[TaskController::class , 'destroy'] );
+    });
 
 
 
@@ -108,9 +135,12 @@ Route::group(['middleware'=>'auth:sanctum'] , function(){
     });
 
 
-    //MembershipsLevels Routes
-    Route::get('/membership' , [MembershipController::class , 'index']);
-    Route::get('membership/{id}' , [MembershipController::class , 'purchase']);
+
+    //Hiring Route
+    Route::post('/apply-for-hiring' , [HiringController::class , 'hiring']) ;
+
+
+
 
     //Dashboard Routes
     Route::group(['middleware' =>'admin'] , function (){

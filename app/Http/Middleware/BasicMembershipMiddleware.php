@@ -16,11 +16,9 @@ class BasicMembershipMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::user() ;
-        if($user && $user->membership_level_id < 2 ){
-            if($user->free_trails > 0){
-                $user->DecrementFreeTrails() ;
-
+        $user = Auth::user();
+        if ($user && $user->membership_level_id < 2) {
+            if ($user->free_trails > 0) {
                 $response = $next($request);
 
                 $responseData = json_decode($response->getContent(), true);
@@ -30,10 +28,8 @@ class BasicMembershipMiddleware
 
                 return $response;
             }
-
-            return response()->json( 'Unauthorized access. You must be Basic , Premium or Enterprise membership level to access this feature.' , 403) ;
-            }
+            return response()->json('Unauthorized access. You must be Basic , Premium or Enterprise membership level to access this feature.', 403);
+        }
         return $next($request);
     }
-
 }

@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 use App\Mail\EmailVerificationMail;
 use App\Models\User;
 use App\Notifications\EmailVerificationNotification;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -19,13 +20,13 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $credintionals['name'],
             'email' => $credintionals['email'],
-            'password' => bcrypt($credintionals['password'])
+            'password' => bcrypt($credintionals['password']) ,
         ]);
 
         $token = $user->createToken('MyApp')->plainTextToken;
 
 
-        $responce = [
+        $response = [
             'user' => $user,
             'token'=>$token
         ];
@@ -35,6 +36,6 @@ class RegisterController extends Controller
 
 
         Mail::to($user->email)->Send(new EmailVerificationMail($code));
-        return Response($responce, 201);
+        return Response($response, 201);
     }
 }

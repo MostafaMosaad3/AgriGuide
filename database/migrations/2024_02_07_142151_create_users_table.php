@@ -20,7 +20,6 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('otp_code')->nullable();
             $table->string('password');
-            $table->integer('free_trails')->default(3) ;
             $table->rememberToken();
             $table->timestamps();
         });

@@ -46,6 +46,10 @@ class User extends Authenticatable
         return $this->hasMany(Post::class) ;
     }
 
+    public function tasks(){
+        return $this->hasMany(Task::class) ;
+    }
+
     public function membershipLevel()
     {
         return $this->belongsTo(MemberShip_level::class, 'membership_level_id', 'id');
