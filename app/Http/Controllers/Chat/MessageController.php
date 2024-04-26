@@ -74,4 +74,27 @@ class MessageController extends Controller
 
     }
 
+
+    public function conversation($id){
+
+        $user = auth()->user() ;
+        $messages = Message::where(function($query)use($user , $id){
+           $query->where('sender_id' , $user->id)->where('receiver_id' , $id);
+        })->orwhere(function($query)use($id , $user){
+           $query->where('sender_id' , $id)->where('receiver_id' , $user->id);
+        })->get();
+
+        $conversation = $messages->map(function($message) use($user){
+            return [
+                'message'=>$message->message ,
+                'sent by authenticated user' =>$message->sender_id == $user->id
+            ];
+        });
+
+        return response()->json($conversation);
+    }
+
+
+
+
 }

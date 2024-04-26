@@ -17,7 +17,10 @@ class QuestionCommentController extends Controller
 
         $comment = Comment::create($attributes) ;
 
-        return response()->json(['comment added !' , $comment]);
+        return response()->json(['comment added !' ,
+            'body' => $comment->body,
+            'name' => auth()->user()->name,
+            'thumbnail' => auth()->user()->thumbnail,]);
 
     }
 }

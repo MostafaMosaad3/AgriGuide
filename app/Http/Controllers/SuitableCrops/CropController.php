@@ -21,6 +21,12 @@ class CropController extends Controller
         return response()->json($soils, 200);
     }
 
+    public function soil($name){
+        $soil = Soil::where('name' , 'like' , '%' . $name . '%' )->first() ;
+        $crops = $soil->crops;
+        return response()->json($crops, 200);
+    }
+
 
     public function show($id)
     {

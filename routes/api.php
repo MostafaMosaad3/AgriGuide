@@ -73,6 +73,7 @@ Route::group(['middleware'=>'auth:sanctum'] , function(){
     //Crops Routes
     Route::get('/crops' , [CropController::class , 'index']);
     Route::get('/crops/soils' , [CropController::class , 'soils']);
+    Route::get('/crops/soil/{name}' , [CropController::class , 'soil']);
     Route::get('/crops/search' , [CropController::class , 'search']) ;
     Route::get('/crops/crop/{id}' , [CropController::class , 'show']);
 
@@ -101,6 +102,7 @@ Route::group(['middleware'=>'auth:sanctum'] , function(){
     Route::post('/send_message' , [MessageController::class , 'sendMessage']) ;
     Route::get('/receive_message/{id}' , [MessageController::class , 'receiveMessage']);
     Route::get('/conversations', [MessageController::class, 'conversations']);
+    Route::get('/conversations/{id}', [MessageController::class, 'conversation']);
 
 
 

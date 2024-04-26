@@ -11,7 +11,7 @@ class DiseaseController extends Controller
 
     public function index()
     {
-        $diseases = Disease::select('name' , 'image' , 'description')->paginate(6);
+        $diseases = Disease::select('id' , 'name' , 'image' , 'description')->paginate(6);
 
         return response()->json($diseases);
 

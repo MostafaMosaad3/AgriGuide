@@ -13,7 +13,7 @@ class TipController extends Controller
         $tips = Post::with([
             'user'=>function($query){$query->select('id', 'name');} ,
             'category'=>function($query){$query->select('id' , 'name') ;}])
-            ->select('title', 'image' , 'user_id', 'category_id')
+            ->select('id' , 'title', 'image' , 'user_id', 'category_id')
             ->paginate(6);
         return response()->json(['tips'=>$tips]) ;
     }
@@ -23,8 +23,8 @@ class TipController extends Controller
         return response()->json(['categories' => $categories]);
     }
 
-    public function category($id){
-        $category = Category::find($id);
+    public function category($name){
+        $category = Category::where('name' , 'like' , '%' .$name  . '%')->first() ;
         $tips = $category->posts;
         return response()->json(['category'=>$category->name ,'tips' => $tips]);
     }

@@ -12,7 +12,7 @@ class SoilController extends Controller
 
     public function index()
     {
-        $soils = Soil::select('name' , 'image' , 'Recommended_Water')->get();
+        $soils = Soil::select('id' , 'name' , 'image' , 'Recommended_Water')->get();
 
         return response()->json($soils);
 
