@@ -18,7 +18,7 @@ class loginController extends Controller
         if (!$user || !Hash::check($data['password'], $user->password ))
         {
             return response([
-                'message' => 'email or password is unvalid'],
+                'message' => 'email or password is invalid'],
                 '401'
             );
         }

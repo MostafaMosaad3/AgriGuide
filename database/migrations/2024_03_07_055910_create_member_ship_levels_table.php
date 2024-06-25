@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('member_ship_levels', function (Blueprint $table) {
             $table->id();
             $table->string('name') ;
-            $table->text('Features');
-            $table->text('Benefits');
+            $table->text('Feature 1');
+            $table->text('Feature 2');
+            $table->text('Feature 3')->nullable();
+            $table->text('Feature 4')->nullable();
             $table->string('Price');
             $table->timestamps();
         });

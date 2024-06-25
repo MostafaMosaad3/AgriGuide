@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name') ;
             $table->string('image') ;
             $table->text('Recommended Time') ;
+            $table->decimal('Moisture' , 4 , 2);
             $table->text('Planting Method') ;
             $table->text('water requirement') ;
             $table->text('Irrigation Method') ;

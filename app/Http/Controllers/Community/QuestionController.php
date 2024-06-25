@@ -38,14 +38,14 @@ class QuestionController extends Controller
     }
 
     public function show($id){
-        $question = Question::with(['user' =>function ($query){
-            $query->select('id' , 'name' , 'thumbnail') ;
-        } , 'comments' ])->find($id) ;
+        $question = Question::with('user:id,name,thumbnail')->find($id) ;
+
+        $comments = $question->comments()->with('user:id,name,thumbnail')->get();
 
         if (!$question) {
             return response()->json(['message' => 'Question not found'], 404);
         }
-        return response()->json(['question'=>$question]) ;
+        return response()->json(['question'=>$question , 'comments'=>$comments]);
 
     }
 

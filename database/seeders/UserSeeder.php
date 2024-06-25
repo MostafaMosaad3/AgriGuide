@@ -13,14 +13,13 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $image1 = public_path('public/storage/user/1.png');
 
         User::create([
             'id' => '1' ,
            'name'=>'Mosaad' ,
             'email'=> 'Mosaad@gmail.com' ,
             'password'=> bcrypt('password') ,
-            'thumbnail'=> url('storage/user/1.png') ,
+            'thumbnail'=> url('storage/user/1.jpg') ,
             'is_admin'=>'1' ,
             'membership_level_id'=>'4'
         ] ,
@@ -30,7 +29,7 @@ class UserSeeder extends Seeder
             'name'=>'Omar' ,
             'email'=> 'Omar@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/2.png') ,
+            'thumbnail'=> url('storage/user/2.jpg') ,
             'is_admin'=>'1' ,
             'membership_level_id'=>'3'
         ]) ,
@@ -40,7 +39,7 @@ class UserSeeder extends Seeder
             'name'=>'Mohamed' ,
             'email'=> 'Mohamed@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/3.png') ,
+            'thumbnail'=> url('storage/user/3.jpg') ,
             'is_admin'=>'1' ,
             'membership_level_id'=>'3'
         ])  ,
@@ -60,7 +59,7 @@ class UserSeeder extends Seeder
             'name'=>'Sayed' ,
             'email'=> 'Sayed@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/5.png') ,
+            'thumbnail'=> url('storage/user/5.jpg') ,
             'is_admin'=>'1' ,
             'membership_level_id'=>'2'
         ] ),
@@ -70,7 +69,7 @@ class UserSeeder extends Seeder
             'name'=>'Nora' ,
             'email'=> 'Nora@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/6.png') ,
+            'thumbnail'=> url('storage/user/6.jpg') ,
             'membership_level_id'=>'1'
         ]),
 
@@ -79,7 +78,7 @@ class UserSeeder extends Seeder
             'name'=>'Ward' ,
             'email'=> 'Ward@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/7.png') ,
+            'thumbnail'=> url('storage/user/7.jpg') ,
             'membership_level_id'=>'1'
         ])   ,
 
@@ -88,7 +87,7 @@ class UserSeeder extends Seeder
             'name'=>'Walaa' ,
             'email'=> 'Walaa@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/8.png') ,
+            'thumbnail'=> url('storage/user/8.jpg') ,
             'membership_level_id'=>'1'
         ]) ,
 
@@ -97,7 +96,7 @@ class UserSeeder extends Seeder
             'name'=>'Hager' ,
             'email'=> 'Hager@gmail.com' ,
             'password'=> 'password' ,
-            'thumbnail'=> url('storage/user/9.png') ,
+            'thumbnail'=> url('storage/user/9.jpg') ,
             'membership_level_id'=>'1'
         ])  ,
 

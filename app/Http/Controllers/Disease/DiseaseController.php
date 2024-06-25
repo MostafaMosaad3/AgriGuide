@@ -30,10 +30,9 @@ class DiseaseController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Disease $disease)
     {
-        $disease = Disease::find($id) ;
-        if (!$disease) {
+        if (! $disease) {
             return response()->json(['message' => 'Disease not found'], 404);
         }
         return response()->json(['disease'=>$disease]);

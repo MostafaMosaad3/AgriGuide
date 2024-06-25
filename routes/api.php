@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordVerificationController;
@@ -24,9 +23,6 @@ use App\Http\Controllers\Service\ServiceController;
 use App\Http\Controllers\Soil\SoilController;
 use App\Http\Controllers\SuitableCrops\CropController;
 use App\Http\Controllers\Task\TaskController;
-use App\Models\Post;
-use App\Models\Question;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -76,12 +72,13 @@ Route::group(['middleware'=>'auth:sanctum'] , function(){
     Route::get('/crops/soil/{name}' , [CropController::class , 'soil']);
     Route::get('/crops/search' , [CropController::class , 'search']) ;
     Route::get('/crops/crop/{id}' , [CropController::class , 'show']);
+    Route::post('/sensor' , [CropController::class  , 'sensor'])->middleware('enterprise_membership'); ;
 
 
     //Diseases Routes
     Route::get('/diseases' , [DiseaseController::class , 'index']);
     Route::get('/diseases/search' , [DiseaseController::class , 'search']) ;
-    Route::get('/diseases/disease/{name}' , [DiseaseController::class ,'show']) ;
+    Route::get('/diseases/{disease}' , [DiseaseController::class ,'show']) ;
 
 
 
@@ -98,16 +95,9 @@ Route::group(['middleware'=>'auth:sanctum'] , function(){
     Route::get('membership/{id}' , [MembershipController::class , 'purchase']);
 
 
-    //Chat Routes
-    Route::post('/send_message' , [MessageController::class , 'sendMessage']) ;
-    Route::get('/receive_message/{id}' , [MessageController::class , 'receiveMessage']);
-    Route::get('/conversations', [MessageController::class, 'conversations']);
-    Route::get('/conversations/{id}', [MessageController::class, 'conversation']);
 
 
-
-
-    //Community Routes
+    // Community Routes
     Route::group(['middleware' => 'basic_membership'] , function() {
         Route::get('/question', [QuestionController::class, 'index']);
         Route::post('/question/create_question', [QuestionController::class, 'create']);
@@ -131,16 +121,18 @@ Route::group(['middleware'=>'auth:sanctum'] , function(){
 
 
     //Consultation Routes
+    Route::get('/consultation', [InstractorController::class, 'index']);
+    Route::get('/consultation/{id}', [InstractorController::class, 'show']);
     Route::group(['middleware'=>'premium_membership'] , function(){
-        Route::get('/consultation', [InstractorController::class, 'index']);
-        Route::get('/consultation/{id}', [InstractorController::class, 'show']);
+        Route::post('/send_message' , [MessageController::class , 'sendMessage']) ;
+        Route::get('/receive_message/{id}' , [MessageController::class , 'receiveMessage']);
+        Route::get('/conversations', [MessageController::class, 'conversations']);
+        Route::get('/conversations/{id}', [MessageController::class, 'conversation']);
     });
-
 
 
     //Hiring Route
     Route::post('/apply-for-hiring' , [HiringController::class , 'hiring']) ;
-
 
 
 
@@ -154,20 +146,16 @@ Route::group(['middleware'=>'auth:sanctum'] , function(){
     });
 
 
+
 }) ;
 
 
-
-
-
-
-
-//public routes
-Route::post('/register' , [RegisterController::class, 'register']);
-Route::post('/login' , [LoginController::class, 'login']) ;
-Route::post('/forget_password' , [ForgetPasswordController::class , 'forget_password']) ;
-Route::post('/forget_password_verification' , [ResetPasswordVerificationController::class , 'forget_password_verification']) ;
-Route::post('/reset_password' , [ResetPasswordController::class , 'reset_password']) ;
+    //public routes
+    Route::post('/register' , [RegisterController::class, 'register']);
+    Route::post('/login' , [LoginController::class, 'login']) ;
+    Route::post('/forget_password' , [ForgetPasswordController::class , 'forget_password']) ;
+    Route::post('/forget_password_verification' , [ResetPasswordVerificationController::class , 'forget_password_verification']) ;
+    Route::post('/reset_password' , [ResetPasswordController::class , 'reset_password']) ;
 
 
 

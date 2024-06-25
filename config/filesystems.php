@@ -78,6 +78,7 @@ return [
         public_path('storage/soil')=>storage_path('app\public/soil') ,
         public_path('storage/crop')=>storage_path('app\public/crop') ,
         public_path('storage/disease')=>storage_path('app\public/disease') ,
+        public_path('storage/weather')=>storage_path('app\public/weather') ,
     ],
 
 ];
